@@ -1,0 +1,6 @@
+<%= link_to "New location", new_user_location_path %><br>
+<% @locations.each do |location| %>
+Latitude: <%= location.latitude %><br>
+Longitude: <%= location.longitude %><br>
+Date: <%= location.created_at %><br><br>
+<% end %>
