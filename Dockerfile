@@ -1,5 +1,4 @@
 FROM ruby:2.5 
-MAINTAINER marko@codeship.com
 
 # Install apt based dependencies required to run Rails as 
 # well as RubyGems. As the Ruby image itself is based on a 
@@ -23,6 +22,8 @@ RUN gem install bundler && bundle install --jobs 20 --retry 5
 
 # Copy the main application.
 COPY . ./
+
+RUN rake db:migrate
 
 # Expose port 3000 to the Docker host, so we can access it 
 # from the outside.
