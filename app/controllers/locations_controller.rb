@@ -5,7 +5,17 @@ class LocationsController < ApplicationController
   # GET /users/:user_id/locations
   def index
     @locations = current_user.locations
-    #json_response(@user.locations)
+    @lat = 0.0
+    @lon = 0.0
+    if @locations.count > 0 
+      @locations.each do |location|
+        @lat += location[:latitude]
+        @lon += location[:longitude]
+      end
+      @lat /= @locations.count
+      @lon /= @locations.count
+    end
+    #json_response(@locations)
   end
 
   # GET /users/:user_id/locations/:id

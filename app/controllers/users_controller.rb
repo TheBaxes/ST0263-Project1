@@ -41,7 +41,7 @@ before_action :set_user, only: [:show, :update, :destroy]
   def user_params
     # whitelist params
     #params.permit(:username, :password, :password_confirmation)
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
   def set_user

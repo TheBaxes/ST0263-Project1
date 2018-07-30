@@ -1,7 +1,28 @@
 <%= link_to "New location", new_user_location_path %><br>
 <%= link_to "Go back", root_path %><br><br>
-<% @locations.each do |location| %>
-Latitude: <%= location.latitude %><br>
-Longitude: <%= location.longitude %><br>
-Date: <%= location.created_at %><br><br>
+
+<% if @locations.count > 0 %>
+<div id="map"></div>
+
+
+<script>
+  url = GMaps.staticMapURL({
+  size: [610, 300],
+  lat: <%= @lat %>,
+  lng: <%= @lon %>,
+  markers: [
+  <% @locations.each do |location, index| %>
+  {lat: <%= location.latitude %>,
+  lng: <%= location.longitude %>}
+  <% if index != @locations.count - 1%>
+  ,
+  <% end %>
+  <% end %>
+  ]
+});
+
+$('<img/>').attr('src', url)
+  .appendTo('#map');
+</script>
+
 <% end %>

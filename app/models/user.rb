@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :locations
 
-  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
+  validates :username, presence: true
   has_secure_password
 end
