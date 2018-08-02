@@ -1,24 +1,19 @@
-# README
+# Proyect 1 ST0263
+## By: Sebastian Patiño - spatino6@eafit.edu.co
+## 2018-1
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Running application in local environment
+0. Before launching the application in your local environment be sure to have installed Rails and Ruby latest versions.
 
-Things you may want to cover:
+1. Start by downloading the gems used in the project
+  
+        bundle install
 
-* Ruby version
+2. After that, do a database migration
 
-* System dependencies
+        rails db:migrate
 
-* Configuration
+3. When that is done, start the server
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+        rails server
+4. Finally, test the webpage going into localhost:3000
