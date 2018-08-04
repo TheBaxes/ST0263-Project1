@@ -1,28 +1,26 @@
-<%= link_to "New location", new_user_location_path %><br>
-<%= link_to "Go back", root_path %><br><br>
+<%= button_to "New location", new_user_location_path, :method => "get" %><br>
+<%= button_to "Go back", root_path, :method => "get" %><br><br>
 
 <% if @locations.count > 0 %>
+Here is a map with your registered locations, <%= current_user.username %>!
+
 <div id="map"></div>
 
 
 <script>
-  url = GMaps.staticMapURL({
-  size: [610, 300],
-  lat: <%= @lat %>,
-  lng: <%= @lon %>,
-  markers: [
-  <% @locations.each_with_index do |location, index| %>
-  {lat: <%= location.latitude %>,
-  lng: <%= location.longitude %>}
-  <% if index != @locations.count - 1%>
-  ,
-  <% end %>
-  <% end %>
-  ]
-});
+  var map;
+  $(document).ready(function(){
+  map = L.map('map').setView([<%= @lat %>, <%= @lon %>], 13);
 
-$('<img/>').attr('src', url)
-  .appendTo('#map');
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  
+  <% @locations.each_with_index do |location, index| %>
+  L.marker([<%= location.latitude %>, <%= location.longitude %>])
+  .addTo(map).bindPopup('Marker #<%= index + 1 %>');
+  <% end %>
+  });
 </script>
 
 <% end %>
